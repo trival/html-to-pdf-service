@@ -8,16 +8,25 @@ const app = new Koa()
 app.use(bodyparser())
 app.use(token())
 
+// app.use(function logRequest(ctx, next) {
+// 	console.log('=== request ===')
+// 	console.log(ctx.method)
+// 	// @ts-ignore
+// 	console.log(ctx.request.token)
+// 	console.log(ctx.request.body)
+// 	return next()
+// })
+
 app.use(async (ctx) => {
 	if (
 		ctx.method === 'POST' &&
-		ctx.token &&
-		ctx.token === process.env.PDF_SECRET &&
+		// @ts-ignore
+		ctx.request.token === process.env.PDF_SECRET &&
 		ctx.request.body &&
 		ctx.request.body.url
 	) {
 		ctx.type = 'pdf'
-		ctx.body = printPdf(ctx.request.body.url)
+		ctx.body = await printPdf(ctx.request.body.url)
 	} else {
 		ctx.throw(404)
 	}
