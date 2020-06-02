@@ -13,6 +13,8 @@ WORKDIR /app
 
 COPY . .
 
+ENV NODE_ENV=production
+
 RUN npm i \
 	# Add user so we don't need --no-sandbox.
 	&& addgroup -S pdfuser && adduser -S -g pdfuser pdfuser \
