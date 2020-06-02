@@ -1,0 +1,7 @@
+node_module
+.editorconfig
+.eslintrc.js
+.prettier.json
+docker-compose.yml
+Dockerfile
+test

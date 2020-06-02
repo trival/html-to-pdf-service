@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  pdfgenerator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    # volumes:
+    # - .:/home/pdfuser/app
