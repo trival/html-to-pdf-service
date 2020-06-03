@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A service converting a html page to pdf using puppeteer and headless chromium.",
   "scripts": {
-    "start": "node server.js",
+    "start": "node src/server.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
