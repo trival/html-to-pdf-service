@@ -2,20 +2,14 @@ const Koa = require('koa')
 const bodyparser = require('koa-bodyparser')
 const token = require('koa-bearer-token')
 const printPdf = require('./printPdf')
+const debug = require('./debug')
 
 const app = new Koa()
 
 app.use(bodyparser())
 app.use(token())
 
-// app.use(function logRequest(ctx, next) {
-// 	console.log('=== request ===')
-// 	console.log(ctx.method)
-// 	// @ts-ignore
-// 	console.log(ctx.request.token)
-// 	console.log(ctx.request.body)
-// 	return next()
-// })
+// app.use(debug.logRequest)
 
 app.use(async (ctx) => {
 	if (
@@ -26,7 +20,8 @@ app.use(async (ctx) => {
 		ctx.request.body.url
 	) {
 		ctx.type = 'pdf'
-		ctx.body = await printPdf(ctx.request.body.url)
+		const { url, ...options } = ctx.request.body
+		ctx.body = await printPdf(url, options)
 	} else {
 		ctx.throw(404)
 	}

@@ -2,7 +2,17 @@ const puppeteer = require('puppeteer')
 
 // for configuration, compare https://github.com/Zenika/alpine-chrome/blob/master/with-puppeteer/src/screenshot-asia.js
 
-async function printPdf(url) {
+async function printPdf(url, options) {
+	let displayHeaderFooter = false
+	let headerTemplate = ''
+	let footerTemplate = ''
+
+	if (options.footerTemplate || options.headerTemplate) {
+		displayHeaderFooter = true
+		headerTemplate = options.headerTemplate || headerTemplate
+		footerTemplate = options.footerTemplate || footerTemplate
+	}
+
 	const browser = await puppeteer.launch({
 		args: [
 			'--no-sandbox',
@@ -16,9 +26,9 @@ async function printPdf(url) {
 	await page.goto(url, { waitUntil: 'networkidle0' })
 	const buffer = await page.pdf({
 		format: 'A4',
-		displayHeaderFooter: true,
-		headerTemplate: `<div style="font-size: 12px; font-family: Lato;">Störfestigkeit<div class="pageNumber"></div> <div>/</div><div class="totalPages"></div></div>`,
-		footerTemplate: `<div style="font-size: 12px;"><div class="pageNumber"></div> <div>/</div><div class="totalPages"></div></div>`,
+		displayHeaderFooter,
+		headerTemplate,
+		footerTemplate,
 	})
 
 	await browser.close()
