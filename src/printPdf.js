@@ -4,8 +4,8 @@ const puppeteer = require('puppeteer')
 
 async function printPdf(url, options) {
 	let displayHeaderFooter = false
-	let headerTemplate = ''
-	let footerTemplate = ''
+	let headerTemplate = ' '
+	let footerTemplate = ' '
 
 	if (options.footerTemplate || options.headerTemplate) {
 		displayHeaderFooter = true
