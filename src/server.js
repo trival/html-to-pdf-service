@@ -21,6 +21,7 @@ app.use(async (ctx) => {
 	) {
 		ctx.type = 'pdf'
 		const { url, ...options } = ctx.request.body
+		console.log('converting url to pdf: ', url)
 		ctx.body = await printPdf(url, options)
 	} else {
 		ctx.throw(404)
