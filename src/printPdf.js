@@ -22,18 +22,25 @@ async function printPdf(url, options) {
 			'--disable-dev-shm-usage',
 		],
 	})
-	const page = await browser.newPage()
-	await page.goto(url, { waitUntil: 'networkidle0' })
-	const buffer = await page.pdf({
-		format: 'A4',
-		displayHeaderFooter,
-		headerTemplate,
-		footerTemplate,
-	})
 
-	await browser.close()
+	try {
+		const page = await browser.newPage()
+		await page.goto(url, { waitUntil: 'networkidle0' })
+		const buffer = await page.pdf({
+			format: 'A4',
+			displayHeaderFooter,
+			headerTemplate,
+			footerTemplate,
+		})
 
-	return buffer
+		await browser.close()
+
+		return buffer
+	} catch (e) {
+		await browser.close()
+
+		throw e
+	}
 }
 
 module.exports = printPdf
