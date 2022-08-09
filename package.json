@@ -1,6 +1,6 @@
 {
   "name": "html-to-pdf-service",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A service converting a html page to pdf using puppeteer and headless chromium.",
   "type": "module",
   "scripts": {
