@@ -21,7 +21,8 @@ have a header and/or footer. The the service will then set the
 `displayHeaderFooter` property in the call to `pdf()` on the puppeteer `Page`
 object automatically.
 
-For more information on the templates see the [puppeteer docs](https://pptr.dev/api/puppeteer.pdfoptions).
+For more information on the templates see the
+[puppeteer docs](https://pptr.dev/api/puppeteer.pdfoptions).
 
 ## Test
 
