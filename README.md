@@ -13,13 +13,14 @@ A service converting a html page to pdf using puppeteer and headless chromium
 4. The endpoint returns the buffer with the generated pdf and a content type of
    `application/pdf`
 
+The format of the PDF is currently fixed to A4.
+
 ### Header and footer templates
 
 Optionally you can send the properties `footerTemplate` and `headerTemplate`
 within your POST request body. If any of them is set, the generated PDF will
-have a header and/or footer. The the service will then set the
-`displayHeaderFooter` property in the call to `pdf()` on the puppeteer `Page`
-object automatically.
+have a header and/or footer. The service will then set the `displayHeaderFooter`
+property in the call to `pdf()` on the puppeteer `Page` object automatically.
 
 For more information on the templates see the
 [puppeteer docs](https://pptr.dev/api/puppeteer.pdfoptions).
