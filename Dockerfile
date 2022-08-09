@@ -1,5 +1,5 @@
 # see https://github.com/puppeteer/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
-FROM node:14-slim
+FROM node:18-slim
 
 # Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
 # Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer
@@ -21,7 +21,8 @@ ENV NODE_ENV=production
 
 RUN npm i \
 	# Add user so we don't need --no-sandbox.
-	&& groupadd -r pdfuser && useradd -r -g pdfuser -G audio,video pdfuser \
+	&& groupadd -r pdfuser \
+	&& useradd -r -g pdfuser -G audio,video pdfuser \
 	&& mkdir -p /home/pdfuser/Downloads \
 	&& chown -R pdfuser:pdfuser /home/pdfuser \
 	&& chown -R pdfuser:pdfuser /app
