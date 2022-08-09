@@ -15,7 +15,7 @@ A service converting a html page to pdf using puppeteer and headless chromium
 
 ## Test
 
-Build and run the local container with `docker-compose up`. In another terminal,
+Build and run the local container with `docker compose up`. In another terminal,
 run `npm test` to run end-2-end tests against the local service entpoint.
 
 ## Contributing

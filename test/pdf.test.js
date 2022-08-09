@@ -1,6 +1,10 @@
-const fetch = require('node-fetch').default
-const fs = require('fs')
-const path = require('path')
+import { writeFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 describe('html-to-pdf-service e2e test', () => {
 	it('generates a pdf for a homepage', async () => {
@@ -16,9 +20,9 @@ describe('html-to-pdf-service e2e test', () => {
 		expect(res.status).toBe(200)
 		expect(res.headers.get('content-type')).toBe('application/pdf')
 
-		const pdf = await res.buffer()
+		const pdf = await res.arrayBuffer()
 
-		return fs.promises.writeFile(path.resolve(__dirname, 'test.pdf'), pdf)
+		return writeFile(resolve(__dirname, 'test.pdf'), Buffer.from(pdf))
 	})
 
 	it('returns 404 for wrong input', async () => {

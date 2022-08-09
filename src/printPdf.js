@@ -1,8 +1,8 @@
-const puppeteer = require('puppeteer')
+import { launch } from 'puppeteer'
 
 // for configuration, compare https://github.com/Zenika/alpine-chrome/blob/master/with-puppeteer/src/screenshot-asia.js
 
-async function printPdf(url, options) {
+export async function printPdf(url, options) {
 	let displayHeaderFooter = false
 	let headerTemplate = ' '
 	let footerTemplate = ' '
@@ -13,7 +13,7 @@ async function printPdf(url, options) {
 		footerTemplate = options.footerTemplate || footerTemplate
 	}
 
-	const browser = await puppeteer.launch({
+	const browser = await launch({
 		args: [
 			'--no-sandbox',
 			'--disable-setuid-sandbox',
@@ -43,4 +43,4 @@ async function printPdf(url, options) {
 	}
 }
 
-module.exports = printPdf
+export default printPdf

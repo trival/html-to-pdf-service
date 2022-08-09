@@ -1,15 +1,15 @@
-const Koa = require('koa')
-const bodyparser = require('koa-bodyparser')
-const token = require('koa-bearer-token')
-const printPdf = require('./printPdf')
-const debug = require('./debug')
+import Koa from 'koa'
+import bodyparser from 'koa-bodyparser'
+import { bearerToken } from 'koa-bearer-token'
+import printPdf from './printPdf.js'
+import { logRequest } from './debug.js'
 
 const app = new Koa()
 
 app.use(bodyparser())
-app.use(token())
+app.use(bearerToken())
 
-// app.use(debug.logRequest)
+// app.use(logRequest)
 
 app.use(async (ctx) => {
 	if (
